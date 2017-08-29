@@ -6,7 +6,7 @@ export default class ThemeSwitcher extends React.Component {
         super(props);
 
         this.state = {
-            theme: 'theme1'
+            theme: 'lightTheme'
         };
 
         this.toggleTheme = this.toggleTheme.bind(this);
@@ -30,7 +30,7 @@ export default class ThemeSwitcher extends React.Component {
 
     toggleTheme(e) {
         if(e.key === '`') {
-            const theme = this.state.theme === 'theme1' ? 'theme2' : 'theme1';
+            const theme = this.state.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
             this.setState({ theme });
         }
     }

@@ -11,8 +11,18 @@ import { storiesOf } from '@storybook/react';
 // Setup the ThemeManager with Aprodite
 const aphroditeInterface = AphroditeInterface(aphrodite);
 ThemeManager.setStyleInterface(aphroditeInterface);
-ThemeManager.addTheme('theme1', { color: 'red' });
-ThemeManager.addTheme('theme2', { color: 'blue' });
+ThemeManager.addTheme('lightTheme', {
+    color: '#222',
+    fontSize: 16,
+    unit: 'px',
+    background: '#FCFCFC'
+});
+ThemeManager.addTheme('darkTheme', {
+    color: '#ddd',
+    fontSize: 1.2,
+    unit: 'em',
+    background: '#333'
+});
 
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing '`'
