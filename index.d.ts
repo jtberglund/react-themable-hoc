@@ -21,13 +21,14 @@ declare module 'react-themable-hoc' {
     // ThemeManager
     // ----------------------------------------------------------------------
 
+    // TODO
     type Theme = any;
 
     interface ThemeStyles {
         [key: string]: React.CSSProperties;
     }
 
-    export class ThemeManager {
+    export interface ThemeManager {
         setStyleInterface: (styleInterface: StyleInterface) => void;
 
         addTheme: (themeName: string, themeStyles: Theme) => void;
@@ -44,7 +45,6 @@ declare module 'react-themable-hoc' {
     type Aphrodite = any; // TODO
     export function AphroditeInterface(aphrodite?: Aphrodite): StyleInterface;
 
-
     //
     // themed (HOC)
     // ----------------------------------------------------------------------
@@ -56,7 +56,7 @@ declare module 'react-themable-hoc' {
         innerRef: (el: any) => void;
     }
 
-    export default function themed<Props = {}, ThemeProps = {}>(
+    export function themed<Props = {}, ThemeProps = {}>(
         createStyles: StylesThunk<Props> | {},
         options?: Partial<ThemableOptions>):
         (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props>;

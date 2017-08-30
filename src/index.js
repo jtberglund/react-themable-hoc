@@ -1,12 +1,11 @@
-import AphroditeInterface from './interfaces/AphroditeInterface';
-import ThemableHOC from './ThemableHOC';
+import { AphroditeInterface } from './interfaces';
 import ThemeManager from './ThemeManager';
 import ThemeProvider from './ThemeProvider';
+import themed from './themed';
 
 export {
     ThemeManager,
     ThemeProvider,
-    AphroditeInterface
+    AphroditeInterface,
+    themed
 };
-
-export default ThemeableHOC;
