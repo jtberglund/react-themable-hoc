@@ -4,7 +4,7 @@ import ThemeManager from './ThemeManager';
 import hoistStatics from 'hoist-non-react-statics';
 
 function getBaseClass(isPure) {
-    return isPure ? React.PureComponent : React.Component
+    return isPure ? React.PureComponent : React.Component;
 }
 
 /**
@@ -18,11 +18,10 @@ export default function themed(createStyles, options = {}) {
         const BaseClass = getBaseClass(options.pure);
 
         class ThemableHOC extends BaseClass {
-
             constructor(props, context) {
                 super(props, context);
 
-                if(context.subscribeToTheme) {
+                if (context.subscribeToTheme) {
                     context.subscribeToTheme(this.onThemeChange.bind(this));
                 } else {
                     console.warn('Could not find function "subscribeToTheme" in the context');
@@ -40,9 +39,7 @@ export default function themed(createStyles, options = {}) {
                     classNames: stylesToPass
                 };
 
-                return (
-                    <WrappedComponent {...this.props} {...extraProps} />
-                );
+                return <WrappedComponent {...this.props} {...extraProps} />;
             }
 
             onThemeChange(theme) {
@@ -52,9 +49,8 @@ export default function themed(createStyles, options = {}) {
             getThemedStyles(theme) {
                 // Allow users to pass a POJO instead of a function if
                 // the styles aren't reliant upon the theme or props
-                const styles = typeof createStyles === 'function' ?
-                    createStyles(theme, this.props) :
-                    createStyles || {};
+                const styles =
+                    typeof createStyles === 'function' ? createStyles(theme, this.props) : createStyles || {};
 
                 return ThemeManager.css(styles);
             }
@@ -69,5 +65,5 @@ export default function themed(createStyles, options = {}) {
         ThemableHOC.displayName = `Themed(${componentName})`;
 
         return hoistStatics(ThemableHOC, WrappedComponent);
-    }
+    };
 }

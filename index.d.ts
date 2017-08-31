@@ -1,14 +1,13 @@
 import * as React from 'react';
 
 declare module 'react-themable-hoc' {
-
     //
     // ThemeProvider
     // ----------------------------------------------------------------------
 
     export interface StyleInterface {
         // TODO
-        css: (styles?: any) => ({} | undefined);
+        css: (styles?: any) => {} | undefined;
     }
 
     interface ThemeProviderProps {
@@ -58,6 +57,6 @@ declare module 'react-themable-hoc' {
 
     export function themed<Props = {}, ThemeProps = {}>(
         createStyles: StylesThunk<Props> | {},
-        options?: Partial<ThemableOptions>):
-        (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props>;
+        options?: Partial<ThemableOptions>
+    ): (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props>;
 }

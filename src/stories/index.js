@@ -26,9 +26,5 @@ ThemeManager.addTheme('darkTheme', {
 
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing '`'
-    .addDecorator(story => (
-        <ThemeSwitcher>
-            {story()}
-        </ThemeSwitcher>
-    ))
+    .addDecorator(story => <ThemeSwitcher>{story()}</ThemeSwitcher>)
     .add('ThemableHOC', () => <TestComponent />);

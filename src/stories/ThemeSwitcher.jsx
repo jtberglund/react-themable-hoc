@@ -21,15 +21,11 @@ export default class ThemeSwitcher extends React.Component {
     }
 
     render() {
-        return (
-            <ThemeProvider theme={this.state.theme}>
-                {this.props.children}
-            </ThemeProvider>
-        );
+        return <ThemeProvider theme={this.state.theme}>{this.props.children}</ThemeProvider>;
     }
 
     toggleTheme(e) {
-        if(e.key === '`') {
+        if (e.key === '`') {
             const theme = this.state.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
             this.setState({ theme });
         }

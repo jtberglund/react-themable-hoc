@@ -5,7 +5,6 @@ import ThemeManager from '../ThemeManager';
 import { expect } from 'chai';
 
 describe('ThemeManager', () => {
-
     it('to throw if no style interface', () => {
         expect(() => ThemeManager.getTheme('testTheme')).to.throw();
     });
@@ -24,5 +23,4 @@ describe('ThemeManager', () => {
         ThemeManager.setStyleInterface({ css: noop });
         expect(() => ThemeManager.css({})).to.not.throw();
     });
-
 });

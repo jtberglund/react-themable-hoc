@@ -7,7 +7,7 @@ export default ({ StyleSheet, css } = aphrodite) => ({
         const styleKeys = Object.keys(createdStyles);
 
         // Use regular for-loop for performance
-        for(let i = 0; i < styleKeys.length; i++) {
+        for (let i = 0; i < styleKeys.length; i++) {
             const key = styleKeys[i];
             classNames[key] = css(createdStyles[key]);
         }

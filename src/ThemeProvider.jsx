@@ -9,14 +9,13 @@ class EventHandler {
      * Subscribe to an event type
      */
     static subscribe(event, listener, options = {}) {
-
-        if(event && !listener) {
+        if (event && !listener) {
             // Partial application - returns function that takes a listener and options
             // for this event type
             return (l, o) => this.subscribe(event, l, o);
         }
 
-        if(!this.listeners[event]) {
+        if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
 
@@ -28,7 +27,7 @@ class EventHandler {
      */
     static unsubscribe(event, listener) {
         const listenerIndex = this.listeners[event].findIndex(l => l === listener);
-        if(listenerIndex < 0) return;
+        if (listenerIndex < 0) return;
 
         this.listeners[event] = [
             ...this.listeners[event].slice(0, listenerIndex),
@@ -40,18 +39,17 @@ class EventHandler {
      * Publish an event - will execute callbacks for all listeners for the specified event type
      */
     static publish(event, payload) {
-        if(this.listeners[event]) {
+        if (this.listeners[event]) {
             this.listeners[event].forEach(callback => callback(payload));
         }
     }
-};
+}
 
 const ON_THEME_CHANGE = 'ON_THEME_CHANGE';
 
-const subscribeFunc = EventHandler.subscribe(ON_THEME_CHANGE)
+const subscribeFunc = EventHandler.subscribe(ON_THEME_CHANGE);
 
 export default class ThemeProvider extends React.Component {
-
     getChildContext() {
         return {
             // Active theme
@@ -63,7 +61,7 @@ export default class ThemeProvider extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         // Notify listeners of theme change
-        if(this.props.theme !== nextProps.theme) {
+        if (this.props.theme !== nextProps.theme) {
             EventHandler.publish(ON_THEME_CHANGE, ThemeManager.getTheme(nextProps.theme));
         }
     }
@@ -76,7 +74,7 @@ export default class ThemeProvider extends React.Component {
 ThemeProvider.childContextTypes = {
     theme: PropTypes.object,
     subscribeToTheme: PropTypes.func
-}
+};
 
 ThemeProvider.propTypes = {
     theme: PropTypes.string
