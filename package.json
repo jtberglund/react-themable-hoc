@@ -19,6 +19,8 @@
         "themable",
         "css",
         "css-in-js",
+        "css-modules",
+        "style",
         "jss",
         "aphrodite",
         "hoc",
@@ -58,7 +60,6 @@
         "react-addons-test-utils": "^15.0.0",
         "react": "^15.0.0",
         "react-dom": "^15.0.0",
-        "sinon": "^1.17.3",
         "@storybook/react": "^3.2.8"
     },
     "peerDependencies": {
@@ -66,7 +67,6 @@
         "react-dom": "^15.0.0"
     },
     "dependencies": {
-        "aphrodite": "^1.2.3",
         "babel-runtime": "^6.6.1",
         "hoist-non-react-statics": "^2.3.0",
         "invariant": "^2.2.2",

@@ -5,11 +5,6 @@ declare module 'react-themable-hoc' {
     // ThemeProvider
     // ----------------------------------------------------------------------
 
-    export interface StyleInterface {
-        // TODO
-        css: (styles?: any) => {} | undefined;
-    }
-
     interface ThemeProviderProps {
         theme: string;
     }
@@ -19,6 +14,11 @@ declare module 'react-themable-hoc' {
     //
     // ThemeManager
     // ----------------------------------------------------------------------
+
+    export interface StyleInterface {
+        // TODO
+        css: (styles?: any) => {} | undefined;
+    }
 
     // TODO
     type Theme = any;
@@ -36,13 +36,6 @@ declare module 'react-themable-hoc' {
 
         css: (styles: ThemeStyles) => any;
     }
-
-    //
-    // AphroditeInterface
-    // ----------------------------------------------------------------------
-
-    type Aphrodite = any; // TODO
-    export function AphroditeInterface(aphrodite?: Aphrodite): StyleInterface;
 
     //
     // themed (HOC)
