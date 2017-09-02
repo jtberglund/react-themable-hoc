@@ -23,6 +23,12 @@ ThemeManager.addTheme('darkTheme', {
     unit: 'em',
     background: '#333'
 });
+ThemeManager.addTheme('blueTheme', {
+    color: 'white',
+    fontSize: 16,
+    unit: 'px',
+    background: '#2196F3'
+});
 
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing '`'

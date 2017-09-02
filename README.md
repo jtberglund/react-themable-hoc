@@ -73,7 +73,9 @@ You can pass options to the `themed` HOC.
 
 ```js
 export default themed(theme => ({
-    button: { ... }
+    button: {
+        // ...
+    }
 }))(Button, { pure: true });
 ```
 

@@ -1,21 +1,19 @@
 import React from 'react';
 import themed from '../themed';
 
-const TestSFC = ({ classNames }) => (
+const InnerComponent = themed(({ background, color, fontSize, unit }) => ({
+    sfcWrapper: {
+        backgroundColor: background
+    },
+    sfcContent: {
+        color: color,
+        fontSize: `${fontSize}${unit}`
+    }
+}))(({ classNames }) => (
     <div className={classNames.sfcWrapper}>
         <p className={classNames.sfcContent}>[Content goes here]</p>
     </div>
-);
-
-const ThemedTestSFC = themed(theme => ({
-    sfcWrapper: {
-        backgroundColor: theme.background
-    },
-    sfcContent: {
-        color: theme.color,
-        fontSize: `${theme.fontSize}${theme.unit}`
-    }
-}))(TestSFC);
+));
 
 class TestComponent extends React.Component {
     constructor(props) {
@@ -23,24 +21,23 @@ class TestComponent extends React.Component {
     }
 
     render() {
-        const { classNames = {} } = this.props;
+        const { classNames } = this.props;
         return (
             <div className={classNames.wrapper}>
                 <h1 className={classNames.header}>Header text</h1>
                 <div>
-                    <ThemedTestSFC />
+                    <InnerComponent />
                 </div>
             </div>
         );
     }
 }
 
-// export default TestComponent;
-export default themed(theme => ({
+export default themed(({ background, color }) => ({
     wrapper: {
-        backgroundColor: theme.background
+        backgroundColor: background
     },
     header: {
-        color: theme.color
+        color: color
     }
 }))(TestComponent);

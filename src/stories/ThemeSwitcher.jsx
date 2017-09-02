@@ -1,12 +1,14 @@
 import React from 'react';
 import ThemeProvider from '../ThemeProvider';
 
+const THEMES = ['lightTheme', 'darkTheme', 'blueTheme'];
+
 export default class ThemeSwitcher extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            theme: 'lightTheme'
+            theme: THEMES[0]
         };
 
         this.toggleTheme = this.toggleTheme.bind(this);
@@ -26,7 +28,8 @@ export default class ThemeSwitcher extends React.Component {
 
     toggleTheme(e) {
         if (e.key === '`') {
-            const theme = this.state.theme === 'lightTheme' ? 'darkTheme' : 'lightTheme';
+            const currentThemeIndex = THEMES.indexOf(this.state.theme);
+            const theme = THEMES[(currentThemeIndex + 1) % THEMES.length];
             this.setState({ theme });
         }
     }
