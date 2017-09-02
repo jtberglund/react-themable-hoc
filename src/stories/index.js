@@ -1,4 +1,4 @@
-import AphroditeInterface from '../interfaces/AphroditeInterface';
+import AphroditeInterface from 'react-themable-hoc-aphrodite-interface';
 import React from 'react';
 import TestComponent from './TestComponent';
 import ThemeManager from '../ThemeManager';
@@ -9,7 +9,7 @@ import { linkTo } from '@storybook/addon-links';
 import { storiesOf } from '@storybook/react';
 
 // Setup the ThemeManager with Aprodite
-const aphroditeInterface = AphroditeInterface(aphrodite);
+const aphroditeInterface = new AphroditeInterface(aphrodite);
 ThemeManager.setStyleInterface(aphroditeInterface);
 ThemeManager.addTheme('lightTheme', {
     color: '#222',

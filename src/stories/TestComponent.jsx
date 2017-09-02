@@ -1,5 +1,5 @@
 import React from 'react';
-import themed from '../ThemableHOC';
+import themed from '../themed';
 
 const TestSFC = ({ classNames }) => (
     <div className={classNames.sfcWrapper}>
