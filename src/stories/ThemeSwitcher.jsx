@@ -27,7 +27,7 @@ export default class ThemeSwitcher extends React.Component {
     }
 
     toggleTheme(e) {
-        if (e.key === '`') {
+        if (e.key === 't') {
             const currentThemeIndex = THEMES.indexOf(this.state.theme);
             const theme = THEMES[(currentThemeIndex + 1) % THEMES.length];
             this.setState({ theme });

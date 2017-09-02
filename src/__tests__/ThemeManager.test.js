@@ -31,8 +31,7 @@ describe('ThemeManager', () => {
     });
 
     it('should not throw if style interface implements interface functions', () => {
-        const noop = () => {};
-        ThemeManager.setStyleInterface({ css: noop });
+        ThemeManager.setStyleInterface({ css: () => {} });
         expect(() => ThemeManager.css({})).to.not.throw();
     });
 });
