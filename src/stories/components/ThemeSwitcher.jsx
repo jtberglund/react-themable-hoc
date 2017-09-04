@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import ThemeProvider from '../ThemeProvider';
+import ThemeProvider from '../../ThemeProvider';
 
 const THEMES = ['lightTheme', 'darkTheme', 'blueTheme'];
 
@@ -7,11 +8,13 @@ export default class ThemeSwitcher extends React.Component {
     constructor(props) {
         super(props);
 
+        props.setup();
+
+        this.toggleTheme = this.toggleTheme.bind(this);
+
         this.state = {
             theme: THEMES[0]
         };
-
-        this.toggleTheme = this.toggleTheme.bind(this);
     }
 
     componentDidMount() {
@@ -34,3 +37,7 @@ export default class ThemeSwitcher extends React.Component {
         }
     }
 }
+
+ThemeSwitcher.propTypes = {
+    setup: PropTypes.func.isRequired
+};
