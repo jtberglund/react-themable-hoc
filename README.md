@@ -12,7 +12,7 @@ npm install --save react-themable-hoc
 
 1. First setup `react-themable-hoc` by setting a css-in-js interface.
 
-    Currently the only available interface is [AphroditeInterface](https://github.com/jtberglund/react-themable-hoc-aphrodite-interface)
+    This example uses the [AphroditeInterface](https://github.com/jtberglund/react-themable-hoc-aphrodite-interface)
 
 ```js
 import AphroditeInterface from 'react-themable-hoc-aphrodite-interface';
@@ -79,9 +79,10 @@ export default themed(theme => ({
 }))(Button, { pure: true });
 ```
 
-## Supported CSS-in-JS libraries
+## Supported CSS-in-JS interfaces
 
-- [Aphrodite](https://github.com/Khan/aphrodite)
+- [AphroditeInterface](https://github.com/jtberglund/react-themable-hoc-aphrodite-interface)
+- [JSSInterface](https://github.com/jtberglund/react-themable-hoc-jss-interface)
 
 ## License
 
