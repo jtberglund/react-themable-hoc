@@ -22,7 +22,7 @@ export default function themed(createStyles, options = {}) {
                 super(props, context);
 
                 if (context.subscribeToTheme) {
-                    context.subscribeToTheme(this.onThemeChange.bind(this));
+                    this.unsubscribeFromTheme = context.subscribeToTheme(this.onThemeChange.bind(this));
                 } else {
                     console.warn('Could not find function "subscribeToTheme" in the context');
                 }
@@ -30,6 +30,12 @@ export default function themed(createStyles, options = {}) {
                 this.state = {
                     stylesToPass: this.getThemedStyles(context.theme)
                 };
+            }
+
+            componentWillUnmount() {
+                if(this.unsubscribeFromTheme) {
+                    this.unsubscribeFromTheme();
+                }
             }
 
             render() {
