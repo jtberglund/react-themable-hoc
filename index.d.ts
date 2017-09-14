@@ -27,14 +27,14 @@ declare module 'react-themable-hoc' {
         [key: string]: React.CSSProperties;
     }
 
-    export interface ThemeManager {
-        setStyleInterface: (styleInterface: StyleInterface) => void;
+    export class ThemeManager {
+        static setStyleInterface: (styleInterface: StyleInterface) => void;
 
-        addTheme: (themeName: string, themeStyles: Theme) => void;
+        static addTheme: (themeName: string, themeStyles: Theme) => void;
 
-        getTheme: (themeName: string) => Theme | undefined;
+        static getTheme: (themeName: string) => Theme | undefined;
 
-        css: (styles: ThemeStyles) => any;
+        static css: (styles: ThemeStyles) => any;
     }
 
     //
