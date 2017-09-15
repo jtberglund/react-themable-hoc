@@ -45,11 +45,14 @@ declare module 'react-themable-hoc' {
 
     export interface ThemableOptions {
         pure: boolean;
-        innerRef: (el: any) => void;
+    }
+
+    export interface ExtraProps {
+        innerRef?: (el: any) => void;
     }
 
     export function themed<Props = {}, ThemeProps = {}>(
         createStyles: StylesThunk<Props> | {},
         options?: Partial<ThemableOptions>
-    ): (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props>;
+    ): (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props & ExtraProps>;
 }
