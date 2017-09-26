@@ -28,7 +28,7 @@ export default function themed(createStyles, options = {}) {
                 }
 
                 this.state = {
-                    stylesToPass: this.getThemedStyles(context.theme)
+                    stylesToPass: this.getThemedStyles(ThemeManager.getCurrentTheme())
                 };
             }
 
@@ -63,7 +63,6 @@ export default function themed(createStyles, options = {}) {
         }
 
         ThemableHOC.contextTypes = {
-            theme: PropTypes.object,
             subscribeToTheme: PropTypes.func
         };
 

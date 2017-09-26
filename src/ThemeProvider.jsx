@@ -8,10 +8,14 @@ const ON_THEME_CHANGE = 'ON_THEME_CHANGE';
 const subscribeFunc = ThemeEvents.subscribe(ON_THEME_CHANGE);
 
 export default class ThemeProvider extends React.Component {
+    constructor(props) {
+        super(props);
+
+        ThemeManager.setCurrentTheme(props.theme);
+    }
+
     getChildContext() {
         return {
-            // Active theme
-            theme: ThemeManager.getTheme(this.props.theme),
             // Used by wrapped components to subcribe to theme changes
             subscribeToTheme: subscribeFunc
         };
@@ -20,6 +24,7 @@ export default class ThemeProvider extends React.Component {
     componentWillReceiveProps(nextProps) {
         // Notify listeners of theme change
         if (this.props.theme !== nextProps.theme) {
+            ThemeManager.setCurrentTheme(nextProps.theme);
             ThemeEvents.publish(ON_THEME_CHANGE, ThemeManager.getTheme(nextProps.theme));
         }
     }
@@ -30,7 +35,6 @@ export default class ThemeProvider extends React.Component {
 }
 
 ThemeProvider.childContextTypes = {
-    theme: PropTypes.object,
     subscribeToTheme: PropTypes.func
 };
 

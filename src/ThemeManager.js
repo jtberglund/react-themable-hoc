@@ -6,6 +6,7 @@ export default class ThemeManager {
     static defaultTheme = {};
     static themes = {};
     static styleInterface;
+    static currentTheme;
 
     static setStyleInterface(styleInterface) {
         this.styleInterface = styleInterface;
@@ -22,6 +23,14 @@ export default class ThemeManager {
             call "ThemeManager.addTheme".`
         );
         return this.themes[themeName];
+    }
+
+    static setCurrentTheme(themeName) {
+        this.currentTheme = themeName;
+    }
+
+    static getCurrentTheme() {
+        return this.getTheme(this.currentTheme);
     }
 
     static css(styles) {
