@@ -56,13 +56,13 @@ const ThemedOuterComponent = themed(({ background, color }) => ({
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing 't'
     .addDecorator(story => <ThemeSwitcher setup={setup}>{story()}</ThemeSwitcher>)
-    .add('JSSInterface', 
+    .add('JSSInterface',
         withInfo(`
             Use [jss](https://github.com/cssinjs/jss) with [react-themable-hoc](https://github.com/jtberglund/react-themable-hoc).
 
             View the [README](https://github.com/jtberglund/react-themable-hoc-jss-interface#react-themable-hoc-jss-interface) for more info.
 
-            ## Usage 
+            ## Usage
             \`\`\`js
                 const jssInterface = new AphroditeInterface();
                 ThemeManager.setStyleInterface(jssInterface);
