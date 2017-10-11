@@ -52,7 +52,25 @@ export default themed(theme => ({
 }))(Button);
 ```
 
-### Styling based on props
+### Options
+
+You can pass options to the `themed` HOC.
+
+```js
+export default themed(theme => ({
+    button: {
+        // ...
+    }
+}), { pure: true })(Button);
+```
+
+#### Available options
+| Name | type | Default | Description |
+|------|------|---------|-------------|
+| pure | boolean | undefined | If true, the HOC will extend from React.PureComponent |
+|shouldUpdateStyles| function | undefined | Determine if stylesheets should be re-created on update. See [Styling based on props](#style-props)|
+
+### <a name="style-props"></a>Styling based on props
 
 The component's props are passed along with the theme when creating your styles. This allows you to specify inline styles based on the props passed in.
 
@@ -65,17 +83,24 @@ export default themed((theme, props) => ({
 }))(Button);
 ```
 
-### Options
-
-You can pass options to the `themed` HOC.
+You can pass a function called `shouldUpdateStyles` as an option to control when the HOC will re-create the stylesheets when its props change.
 
 ```js
-export default themed(theme => ({
+const shouldUpdateStyles = (currProps, nextProps) => {
+    return currProps.size !== nextProps.size;
+};
+
+export default themed((theme, props) => ({
     button: {
-        // ...
+        color: theme.fontColor,
+        width: props.size
     }
-}))(Button, { pure: true });
+}), { shouldUpdateStyles })(Button);
 ```
+
+If `pure` is `true` and no `shouldUpdateStyles` function is provided, `themed` will perform a shallow comparison on its props to determine whether or not the stylesheets should be re-created.
+
+If `pure` is not set and `shouldUpdateStyles` is not provided, `themed` will always re-create stylesheets for this component when it updates.
 
 ## Supported CSS-in-JS interfaces
 
