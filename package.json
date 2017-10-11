@@ -1,6 +1,6 @@
 {
   "name": "react-themable-hoc",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "React higher-order-components that allow for css-in-js-style themes.",
   "repository": {
     "type": "git",
