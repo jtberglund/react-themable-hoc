@@ -2,8 +2,6 @@
 
 Higher-order-components for theming using css-in-js.
 
-**Note: This is still early in development. The `react-themable-hoc` API is subject to change.**
-
 ```
 npm install --save react-themable-hoc
 ```

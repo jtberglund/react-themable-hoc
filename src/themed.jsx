@@ -1,7 +1,10 @@
+import { ON_THEME_CHANGE } from './events';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ThemeEvents from './ThemeEvents';
 import ThemeManager from './ThemeManager';
 import hoistStatics from 'hoist-non-react-statics';
+import shallowequal from 'shallowequal';
 
 function getBaseClass(isPure) {
     return isPure ? React.PureComponent : React.Component;
@@ -13,27 +16,37 @@ function getBaseClass(isPure) {
  * to this component, and returns an object with properties for each set of styles.
  * @param {*} options Options for creating the HOC
  */
-export default function themed(createStyles, options = {}) {
+export default function themed(createStyles, { pure, shouldUpdateStyles } = {}) {
     return WrappedComponent => {
-        const BaseClass = getBaseClass(options.pure);
+        const dependsOnProps = createStyles.length > 1;
+        const BaseClass = getBaseClass(pure);
 
         class ThemableHOC extends BaseClass {
-            constructor(props, context) {
-                super(props, context);
+            constructor(props) {
+                super(props);
 
-                if (context.subscribeToTheme) {
-                    this.unsubscribeFromTheme = context.subscribeToTheme(this.onThemeChange.bind(this));
-                } else {
-                    console.warn('Could not find function "subscribeToTheme" in the context');
-                }
+                this.unsubscribeFromTheme = ThemeEvents.subscribe(ON_THEME_CHANGE, this.onThemeChange.bind(this));
 
                 this.state = {
                     stylesToPass: this.getThemedStyles(ThemeManager.getCurrentTheme())
                 };
             }
 
+            componentWillReceiveProps(nextProps) {
+                if (dependsOnProps) {
+                    // Use shouldUpdateStyles if available.
+                    // If pure, perform shallow equal comparison on the props
+                    const willUpdateStyles = shouldUpdateStyles
+                        ? shouldUpdateStyles(this.props, nextProps)
+                        : pure ? shallowequal(nextProps, this.props) : true;
+                    if (willUpdateStyles) {
+                        this.setState({ stylesToPass: this.getThemedStyles(ThemeManager.getCurrentTheme(), nextProps) });
+                    }
+                }
+            }
+
             componentWillUnmount() {
-                if(this.unsubscribeFromTheme) {
+                if (this.unsubscribeFromTheme) {
                     this.unsubscribeFromTheme();
                 }
             }
@@ -52,19 +65,14 @@ export default function themed(createStyles, options = {}) {
                 this.setState({ stylesToPass: this.getThemedStyles(theme) });
             }
 
-            getThemedStyles(theme) {
+            getThemedStyles(theme, props = this.props) {
                 // Allow users to pass a POJO instead of a function if
                 // the styles aren't reliant upon the theme or props
-                const styles =
-                    typeof createStyles === 'function' ? createStyles(theme, this.props) : createStyles || {};
+                const styles = typeof createStyles === 'function' ? createStyles(theme, props) : createStyles;
 
-                return ThemeManager.css(styles);
+                return ThemeManager.css(styles || {});
             }
         }
-
-        ThemableHOC.contextTypes = {
-            subscribeToTheme: PropTypes.func
-        };
 
         const componentName = WrappedComponent.displayName || WrappedComponent.name || 'Unknown';
         ThemableHOC.displayName = `Themed(${componentName})`;

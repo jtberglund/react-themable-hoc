@@ -53,7 +53,8 @@ const ThemedOuterComponent = themed(({ background, color }) => ({
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing 't'
     .addDecorator(story => <ThemeSwitcher setup={setup}>{story()}</ThemeSwitcher>)
-    .add('AphroditeInterface',
+    .add(
+        'AphroditeInterface',
         withInfo(`
             Use [Aphrodite](https://github.com/Khan/aphrodite) with [react-themable-hoc](https://github.com/jtberglund/react-themable-hoc).
 
@@ -65,7 +66,8 @@ storiesOf('ThemableHOC', module)
                 ThemeManager.setStyleInterface(aphroditeInterface);
             \`\`\`
         `)(() => (
-        <ThemedOuterComponent interfaceType="AphroditeInterface">
-            <ThemedInnerComponent />
-        </ThemedOuterComponent>
-    )));
+            <ThemedOuterComponent interfaceType="AphroditeInterface">
+                <ThemedInnerComponent />
+            </ThemedOuterComponent>
+        ))
+    );

@@ -15,7 +15,7 @@ import { withInfo } from '@storybook/addon-info';
 jss.setup(preset());
 
 function setup() {
-    // Setup the ThemeManager with Aprodite
+    // Setup the ThemeManager with JSS
     const jssInterface = new JSSInterface();
     ThemeManager.setStyleInterface(jssInterface);
 
@@ -56,7 +56,8 @@ const ThemedOuterComponent = themed(({ background, color }) => ({
 storiesOf('ThemableHOC', module)
     // Toggles themes by pressesing 't'
     .addDecorator(story => <ThemeSwitcher setup={setup}>{story()}</ThemeSwitcher>)
-    .add('JSSInterface',
+    .add(
+        'JSSInterface',
         withInfo(`
             Use [jss](https://github.com/cssinjs/jss) with [react-themable-hoc](https://github.com/jtberglund/react-themable-hoc).
 
@@ -64,11 +65,12 @@ storiesOf('ThemableHOC', module)
 
             ## Usage
             \`\`\`js
-                const jssInterface = new AphroditeInterface();
+                const jssInterface = new JSSInterface();
                 ThemeManager.setStyleInterface(jssInterface);
             \`\`\`
         `)(() => (
-        <ThemedOuterComponent interfaceType="JSSInterface">
-            <ThemedInnerComponent />
-        </ThemedOuterComponent>
-    )));
+            <ThemedOuterComponent interfaceType="JSSInterface">
+                <ThemedInnerComponent />
+            </ThemedOuterComponent>
+        ))
+    );

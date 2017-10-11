@@ -41,7 +41,7 @@
     "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "@storybook/addon-info": "^3.2.9",
+    "@storybook/addon-info": "^3.2.12",
     "@storybook/react": "^3.2.8",
     "aphrodite": "^1.2.3",
     "babel-cli": "^6.6.4",
@@ -77,6 +77,7 @@
     "babel-runtime": "^6.6.1",
     "hoist-non-react-statics": "^2.3.0",
     "invariant": "^2.2.2",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "shallowequal": "^1.0.2"
   }
 }

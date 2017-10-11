@@ -1,0 +1,1 @@
+export const ON_THEME_CHANGE = 'ON_THEME_CHANGE';
