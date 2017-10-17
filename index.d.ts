@@ -43,8 +43,10 @@ declare module 'react-themable-hoc' {
 
     type StylesThunk<P> = (theme: Theme, props: P) => ThemeStyles;
 
-    export interface ThemableOptions {
+    export interface ThemableOptions<P> {
         pure: boolean;
+        shouldUpdateStyles?: (currProps: P, nextProps: P) => boolean;
+        classesPropName?: string;
     }
 
     export interface ExtraProps {
@@ -53,6 +55,6 @@ declare module 'react-themable-hoc' {
 
     export function themed<Props = {}, ThemeProps = {}>(
         createStyles: StylesThunk<Props> | {},
-        options?: Partial<ThemableOptions>
+        options?: Partial<ThemableOptions<Props>>
     ): (WrappedComponent: React.ComponentType<Props & ThemeProps>) => React.ComponentType<Props & ExtraProps>;
 }
