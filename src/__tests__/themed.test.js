@@ -88,6 +88,21 @@ describe.only('themed', () => {
         ThemedDiv.prototype.getThemedStyles.restore();
     });
 
+    it('should not re-create stylesheets if "shouldUpdateStyles" function returns false', () => {
+        const shouldUpdateStyles = (currProps, nextProps) => false;
+        const NoUpdateDiv = themed(() => ({ styles: {} }), { shouldUpdateStyles })(Div);
+
+        const wrapper = mount(<NoUpdateDiv />);
+        const div = wrapper.find(Div);
+        const initialClassName = div.props().classNames.styles;
+
+        wrapper.setProps({ color: 'red' });
+
+        const finalClassName = div.props().classNames.styles;
+
+        expect(initialClassName).to.equal(finalClassName);
+    });
+
     it('should extend React.PureComponent if options.pure === true', () => {
         const PureDiv = themed(() => {}, { pure: true })(Div);
         const pureWrapper = shallow(<PureDiv />);
@@ -95,5 +110,14 @@ describe.only('themed', () => {
 
         expect(pureWrapper.instance() instanceof React.PureComponent).to.equal(true);
         expect(wrapper.instance() instanceof React.Component).to.equal(true);
+    });
+
+    it('should set the name of the styles props with the "classesPropName" option', () => {
+        const classesPropName = 'testProp';
+        const DivWithCustomPropName = themed(() => ({}), { classesPropName })(Div);
+        const wrapper = shallow(<DivWithCustomPropName />);
+        const div = wrapper.find(Div);
+
+        expect(div.props()[classesPropName]).to.exist;
     });
 });

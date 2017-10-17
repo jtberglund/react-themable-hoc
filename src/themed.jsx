@@ -16,7 +16,7 @@ function getBaseClass(isPure) {
  * to this component, and returns an object with properties for each set of styles.
  * @param {*} options Options for creating the HOC
  */
-export default function themed(createStyles, { pure, shouldUpdateStyles } = {}) {
+export default function themed(createStyles, { pure, shouldUpdateStyles, classesPropName = 'classNames' } = {}) {
     return WrappedComponent => {
         const dependsOnProps = createStyles.length > 1;
         const BaseClass = getBaseClass(pure);
@@ -55,7 +55,7 @@ export default function themed(createStyles, { pure, shouldUpdateStyles } = {}) 
                 const { stylesToPass } = this.state;
                 const extraProps = {
                     ref: this.props.innerRef,
-                    classNames: stylesToPass
+                    [classesPropName]: stylesToPass
                 };
 
                 return <WrappedComponent {...this.props} {...extraProps} />;
