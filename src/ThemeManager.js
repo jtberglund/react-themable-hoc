@@ -36,11 +36,15 @@ export default class ThemeManager {
     static css(styles) {
         invariant(this.styleInterface, 'No style interface set');
 
-        invariant(
-            typeof this.styleInterface.css === 'function',
-            'Style interface does not implement the "css" function to create styles'
-        );
+        invariant(typeof this.styleInterface.css === 'function', 'Style interface does not implement the "css" function to create styles');
 
         return this.styleInterface.css(styles) || {};
+    }
+
+    static reset() {
+        this.defaultTheme = {};
+        this.themes = {};
+        this.styleInterface = undefined;
+        this.currentTheme = undefined;
     }
 }

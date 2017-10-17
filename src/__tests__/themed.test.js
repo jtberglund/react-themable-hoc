@@ -9,24 +9,10 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import themed from '../themed';
 
-const TEST_THEME1 = { color: 'blue' };
-const TEST_THEME2 = { color: 'green' };
+// TODO create ThemeManager factory...
+beforeEach(() => {
+    ThemeManager.reset();
 
-const Div = ({ classNames }) => <div className={classNames.styles} />;
-
-const DivStyledByProps = themed((theme, props) => ({
-    styles: {
-        backgroundColor: props.color
-    }
-}))(Div);
-
-const ThemedDiv = themed(theme => ({
-    styles: {
-        backgroundColor: theme.color
-    }
-}))(Div);
-
-before(() => {
     const aphroditeInterface = new AphroditeInterface();
     ThemeManager.setStyleInterface(aphroditeInterface);
     ThemeManager.addTheme('testTheme1', TEST_THEME1);
@@ -34,7 +20,24 @@ before(() => {
     ThemeManager.setCurrentTheme('testTheme1');
 });
 
-describe.only('themed', () => {
+describe('themed', () => {
+    const TEST_THEME1 = { color: 'blue' };
+    const TEST_THEME2 = { color: 'green' };
+
+    const Div = ({ classNames }) => <div className={classNames.styles} />;
+
+    const DivStyledByProps = themed((theme, props) => ({
+        styles: {
+            backgroundColor: props.color
+        }
+    }))(Div);
+
+    const ThemedDiv = themed(theme => ({
+        styles: {
+            backgroundColor: theme.color
+        }
+    }))(Div);
+
     it('should re-create stylesheets when the theme changes', () => {
         const getThemedStylesSpy = sinon.spy(ThemedDiv.prototype, 'getThemedStyles');
         const onThemeChangeSpy = sinon.spy(ThemedDiv.prototype, 'onThemeChange');

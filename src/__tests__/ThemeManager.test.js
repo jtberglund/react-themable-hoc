@@ -4,6 +4,10 @@ import React from 'react';
 import ThemeManager from '../ThemeManager';
 import { expect } from 'chai';
 
+beforeEach(() => {
+    ThemeManager.reset();
+});
+
 describe('ThemeManager', () => {
     it('should throw if no style interface', () => {
         const themeName = 'testTheme';
